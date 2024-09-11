@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="astar.js" defer></script>
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="../../index.html">index</a>
+    <h1>custom astar implementation</h1>
+
+    <label for="mode">Mode</label>
+    <select id="mode">
+        <option value="place_start">place start</option>
+        <option value="place_end">place end</option>
+        <option value="place_block">place block</option>
+    </select>
+
+    <br><br>
+
+    <canvas id="canvas" width="600" height="600"></canvas>
+
+    <table>
+        <tr>
+            <th>
+                <label for="heuristics">Heuristics</label>
+            </th>
+            <th>
+                <select id="heuristics" onchange="find_path()">
+                    <option value="manhattan">Manhattan</option>
+                    <option value="chebyshev">Chebyshev</option>
+                </select>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                <label for="neighbors">Neighbors</label>
+            </th>
+            <th>
+                <select id="neighbors" onchange="find_path()">
+                    <option value="4">4 neighbors</option>
+                    <option value="8A">8 neighbors A</option>
+                    <option value="8B">8 neighbors B</option>
+                    <option value="8C">8 neighbors C</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+</body>
+
+</html>

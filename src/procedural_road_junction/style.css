@@ -1,0 +1,8 @@
+h1 {
+    color: red;
+}
+
+canvas {
+    border: solid 1px black;
+    user-select: none;
+}
