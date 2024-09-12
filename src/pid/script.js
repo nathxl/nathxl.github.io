@@ -33,6 +33,8 @@ class MaxLengthArray {
     }
 }
 
+let t = 0;
+
 const max_array_length = 500;
 
 let temperature = 0;
@@ -56,18 +58,16 @@ let f0 = 30; // f0 : cut-off frequency
 let tau = 1 / (2 * Math.PI * f0); // low pass filter time constant
 let limMin = 0;
 let limMax = 1;
-let T = 1 / 60;
+let T = 1 / 60; // period (or time delta between two samples)
 
 let prevIntegrator = 0;
 let prevDifferentiator = 0;
 let prevError = 0;
 let prevMeasurement = 0;
 
-
 let sensor = 0;
 
 
-// const delta_time = 1 / 60;
 
 
 function clamp(value, min, max) {
@@ -152,6 +152,11 @@ function update_temperature() {
 }
 
 
+function update_time() {
+    t++;
+    if (t > 500) t = 0;
+}
+
 function draw_gauge() {
     // draw gradient
     ctx.lineWidth = 1;
@@ -222,6 +227,14 @@ function draw_graph() {
     ctx.lineTo(800, 500);
     ctx.lineTo(800, 100);
     ctx.stroke();
+
+    // draw time
+    ctx.strokeStyle = 'gray';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(800 - t, 100);
+    ctx.lineTo(800 - t, 500);
+    ctx.stroke();
 }
 
 function draw() {
@@ -238,13 +251,11 @@ function toggle_pause() {
 
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    update_sensor()
-
     if (mode.value == 'pid') temperature += PID(Number(target.value), sensor);
     else if (mode.value == 'basic') temperature += basic(Number(target.value), sensor)
-
-
     update_temperature();
+    update_sensor();
+    update_time();
     draw();
 
     if (!pause) window.requestAnimationFrame(gameLoop);
