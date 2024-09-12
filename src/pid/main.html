@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,65 @@
     <script src="script.js" defer></script>
     <title>Document</title>
 </head>
+
 <body>
     <a href="../../index.html">index</a>
     <h1>PID controller</h1>
 
+
+    <table>
+        <tr>
+            <th>Heating element</th>
+            <th>Sensor</th>
+            <th>Tank properties</th>
+            <th>PID properties</th>
+        </tr>
+        <tr>
+            <td>
+                <select name="heater_mode" id="heater_mode">
+                    <option value="all_or_nothing">all or nothing</option>
+                    <option value="gradual">gradual</option>
+                </select>
+                <label for="heater_mode">heater mode</label>
+            </td>
+            <td>
+                <input type="range" id="target" name="target" min="0" max="100" />
+                <label for="target">target temperature</label>
+            </td>
+            <td>
+                <input type="range" id="cooling_factor" name="cooling_factor" min="0" max="1" step="0.1" />
+                <label for="cooling_factor">cooling factor</label>
+            </td>
+            <td>
+                <input type="range" id="K_p" name="K_p" min="0" max="1" step="0.1" />
+                <label for="K_p">K_p</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="range" id="max_heating_speed" name="max_heating_speed" min="0" max="1" step="0.1" />
+                <label for="max_heating_speed">max heating speed</label>
+            </td>
+            <td>
+                <input type="range" id="sensor_delay" name="sensor_delay" min="0" max="100" />
+                <label for="sensor_delay">sensor delay</label>
+            </td>
+            <td>
+                
+            </td>
+            <td>
+                <input type="range" id="K_i" name="K_i" min="0" max="1" step="0.1" />
+                <label for="K_i">K_i</label>
+            </td>
+        </tr>
+    </table>
+
+
     <canvas id="canvas" width="1000" height="600"></canvas>
+
+    <br>
+
+    <button onclick="toggle_pause()">pause</button>
 </body>
+
 </html>
