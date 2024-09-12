@@ -24,8 +24,8 @@
         <tr>
             <td>
                 <select name="heater_mode" id="heater_mode">
-                    <option value="all_or_nothing">all or nothing</option>
                     <option value="gradual">gradual</option>
+                    <option value="all_or_nothing">all or nothing</option>
                 </select>
                 <label for="heater_mode">heater mode</label>
             </td>
@@ -52,11 +52,20 @@
                 <label for="sensor_delay">sensor delay</label>
             </td>
             <td>
-                
+
             </td>
             <td>
                 <input type="range" id="K_i" name="K_i" min="0" max="1" step="0.1" />
                 <label for="K_i">K_i</label>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <input type="range" id="K_d" name="K_d" min="0" max="1" step="0.1" />
+                <label for="K_d">K_d</label>
             </td>
         </tr>
     </table>
@@ -67,6 +76,132 @@
     <br>
 
     <button onclick="toggle_pause()">pause</button>
+
+    <br>
+
+    <math display="block">
+        <mrow>
+            <mi>u</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mo>=</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>p</mi>
+            </msub>
+            <mi>e</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mo>+</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>i</mi>
+            </msub>
+            <msubsup>
+                <mo movablelimits="false">∫</mo>
+                <mn>0</mn>
+                <mi>t</mi>
+            </msubsup>
+            <mi>e</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>τ</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mi>d</mi>
+            <mi>τ</mi>
+            <mo>+</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>d</mi>
+            </msub>
+            <mfrac>
+                <mrow>
+                    <mi>d</mi>
+                    <mi>e</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                </mrow>
+                <mrow>
+                    <mi>d</mi>
+                    <mi>t</mi>
+                </mrow>
+            </mfrac>
+        </mrow>
+    </math>
+
+    <br>
+
+    <math display="block" class="tml-display" style="display:block math;">
+        <mrow>
+            <mi>u</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mo>=</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>p</mi>
+            </msub>
+            <mi>e</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>t</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mo>+</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>i</mi>
+            </msub>
+            <mrow>
+                <munderover>
+                    <mo stretchy="true">∑</mo>
+                    <mrow>
+                        <mi>τ</mi>
+                        <mo>=</mo>
+                        <mn>0</mn>
+                    </mrow>
+                    <mrow>
+                        <mi>τ</mi>
+                        <mo>=</mo>
+                        <mi>t</mi>
+                    </mrow>
+                </munderover>
+            </mrow>
+            <mi>e</mi>
+            <mo form="prefix" stretchy="false">(</mo>
+            <mi>τ</mi>
+            <mo form="postfix" stretchy="false">)</mo>
+            <mrow>
+                <mi mathvariant="normal">Δ</mi>
+            </mrow>
+            <mi>t</mi>
+            <mo>+</mo>
+            <msub>
+                <mi>K</mi>
+                <mi>d</mi>
+            </msub>
+            <mfrac>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="normal">Δ</mi>
+                    </mrow>
+                    <mi>e</mi>
+                    <mo form="prefix" stretchy="false">(</mo>
+                    <mi>t</mi>
+                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
+                </mrow>
+                <mrow>
+                    <mrow>
+                        <mi mathvariant="normal">Δ</mi>
+                    </mrow>
+                    <mi>t</mi>
+                </mrow>
+            </mfrac>
+        </mrow>
+    </math>
+
+
 </body>
 
 </html>

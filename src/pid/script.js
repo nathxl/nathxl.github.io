@@ -4,11 +4,15 @@ const max_heating_speed = document.getElementById("max_heating_speed");
 const cooling_factor = document.getElementById("cooling_factor");
 const K_p = document.getElementById("K_p");
 const K_i = document.getElementById("K_i");
+const K_d = document.getElementById("K_d");
 const heater_mode = document.getElementById("heater_mode");
 
 
-sensor_delay.value = 10;
+sensor_delay.value = 20;
 cooling_factor.value = 0.1;
+K_p.value = 0.4;
+K_i.value = 0.3;
+K_d.value = 0.1;
 
 
 
@@ -107,8 +111,12 @@ function control() {
     for (const error_t of error_history.array) integral += error_t * delta_time;
     integral *= Number(K_i.value);
 
+    // derivative term
+    const last_error = error_history.array[error_history.array.length - 1] || 0;
+    const delta_error = error - last_error;
+    const derivative = Number(K_d.value) * delta_error / delta_time;
 
-    const signal = proportional + integral;
+    const signal = proportional + integral + derivative;
 
     let output = 0;
     if (heater_mode.value == 'all_or_nothing') {
