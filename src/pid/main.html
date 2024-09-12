@@ -13,6 +13,16 @@
     <a href="../../index.html">index</a>
     <h1>PID controller</h1>
 
+    <div>
+        <label for="mode">mode</label>
+        <select name="mode" id="mode">
+            <option value="off">Off</option>
+            <option value="basic">Basic</option>
+            <option value="pid">PID</option>
+        </select>
+    </div>
+
+    <br>
 
     <table>
         <tr>
@@ -38,7 +48,8 @@
                 <label for="cooling_factor">cooling factor</label>
             </td>
             <td>
-                <input type="range" id="K_p" name="K_p" min="0" max="1" step="0.1" />
+                <!-- <input type="range" id="K_p" name="K_p" min="0" max="1" step="0.01" /> -->
+                <input type="number" id="K_p" name="K_p" min="0" max="10" step="0.01" />
                 <label for="K_p">K_p</label>
             </td>
         </tr>
@@ -48,14 +59,16 @@
                 <label for="max_heating_speed">max heating speed</label>
             </td>
             <td>
-                <input type="range" id="sensor_delay" name="sensor_delay" min="0" max="100" />
-                <label for="sensor_delay">sensor delay</label>
+                <!-- <input type="range" id="sensor_delay" name="sensor_delay" min="0" max="100" /> -->
+                <input type="number" id="sensor_delay" name="sensor_delay" min="0" max="100" step="1" />
+                <label for="sensor_delay">sensor delay in frames (60 fps)</label>
             </td>
             <td>
 
             </td>
             <td>
-                <input type="range" id="K_i" name="K_i" min="0" max="1" step="0.1" />
+                <input type="number" id="K_i" name="K_i" min="0" max="10" step="0.01" />
+                <!-- <input type="range" id="K_i" name="K_i" min="0" max="1" step="0.01" /> -->
                 <label for="K_i">K_i</label>
             </td>
         </tr>
@@ -64,7 +77,8 @@
             <td></td>
             <td></td>
             <td>
-                <input type="range" id="K_d" name="K_d" min="0" max="1" step="0.1" />
+                <input type="number" id="K_d" name="K_d" min="0" max="10" step="0.01" />
+                <!-- <input type="range" id="K_d" name="K_d" min="0" max="1" step="0.01" /> -->
                 <label for="K_d">K_d</label>
             </td>
         </tr>
@@ -76,131 +90,6 @@
     <br>
 
     <button onclick="toggle_pause()">pause</button>
-
-    <br>
-
-    <math display="block">
-        <mrow>
-            <mi>u</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>t</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mo>=</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>p</mi>
-            </msub>
-            <mi>e</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>t</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mo>+</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>i</mi>
-            </msub>
-            <msubsup>
-                <mo movablelimits="false">∫</mo>
-                <mn>0</mn>
-                <mi>t</mi>
-            </msubsup>
-            <mi>e</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>τ</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mi>d</mi>
-            <mi>τ</mi>
-            <mo>+</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>d</mi>
-            </msub>
-            <mfrac>
-                <mrow>
-                    <mi>d</mi>
-                    <mi>e</mi>
-                    <mo form="prefix" stretchy="false">(</mo>
-                    <mi>t</mi>
-                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
-                </mrow>
-                <mrow>
-                    <mi>d</mi>
-                    <mi>t</mi>
-                </mrow>
-            </mfrac>
-        </mrow>
-    </math>
-
-    <br>
-
-    <math display="block" class="tml-display" style="display:block math;">
-        <mrow>
-            <mi>u</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>t</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mo>=</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>p</mi>
-            </msub>
-            <mi>e</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>t</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mo>+</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>i</mi>
-            </msub>
-            <mrow>
-                <munderover>
-                    <mo stretchy="true">∑</mo>
-                    <mrow>
-                        <mi>τ</mi>
-                        <mo>=</mo>
-                        <mn>0</mn>
-                    </mrow>
-                    <mrow>
-                        <mi>τ</mi>
-                        <mo>=</mo>
-                        <mi>t</mi>
-                    </mrow>
-                </munderover>
-            </mrow>
-            <mi>e</mi>
-            <mo form="prefix" stretchy="false">(</mo>
-            <mi>τ</mi>
-            <mo form="postfix" stretchy="false">)</mo>
-            <mrow>
-                <mi mathvariant="normal">Δ</mi>
-            </mrow>
-            <mi>t</mi>
-            <mo>+</mo>
-            <msub>
-                <mi>K</mi>
-                <mi>d</mi>
-            </msub>
-            <mfrac>
-                <mrow>
-                    <mrow>
-                        <mi mathvariant="normal">Δ</mi>
-                    </mrow>
-                    <mi>e</mi>
-                    <mo form="prefix" stretchy="false">(</mo>
-                    <mi>t</mi>
-                    <mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo>
-                </mrow>
-                <mrow>
-                    <mrow>
-                        <mi mathvariant="normal">Δ</mi>
-                    </mrow>
-                    <mi>t</mi>
-                </mrow>
-            </mfrac>
-        </mrow>
-    </math>
-
 
 </body>
 

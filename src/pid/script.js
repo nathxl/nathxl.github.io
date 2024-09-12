@@ -1,3 +1,10 @@
+// Thanks to 
+// PID Controller Implementation in Software - Phil's Lab #6
+// https://www.youtube.com/watch?v=zOByx3Izf5U
+
+
+const mode = document.getElementById("mode");
+
 const target = document.getElementById("target");
 const sensor_delay = document.getElementById("sensor_delay");
 const max_heating_speed = document.getElementById("max_heating_speed");
@@ -7,26 +14,8 @@ const K_i = document.getElementById("K_i");
 const K_d = document.getElementById("K_d");
 const heater_mode = document.getElementById("heater_mode");
 
-
-sensor_delay.value = 20;
-cooling_factor.value = 0.1;
-K_p.value = 0.4;
-K_i.value = 0.3;
-K_d.value = 0.1;
-
-
-
-
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-
-const delta_time = 1 / 60;
-
-
-const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-gradient.addColorStop(0, "red");
-gradient.addColorStop(1, "LightGreen");
-
 
 
 class MaxLengthArray {
@@ -45,24 +34,40 @@ class MaxLengthArray {
 }
 
 const max_array_length = 500;
-const max_displayed_points = 500;
 
-let temperature = 50;
+let temperature = 0;
 let temperature_history = new MaxLengthArray(max_array_length);
-let error_history = new MaxLengthArray(max_array_length);
-let sensor = 0;
-
 
 let pause = false;
 
-let pressedKeys = {};
-document.onkeydown = (e) => { pressedKeys[e.key] = true; }
-document.onkeyup = (e) => { pressedKeys[e.key] = false; }
+sensor_delay.value = 20;
+cooling_factor.value = 0.1;
+K_p.value = 0.05;
+K_i.value = 0.05;
+K_d.value = 0.0;
+
+const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+gradient.addColorStop(0, "red");
+gradient.addColorStop(1, "LightGreen");
 
 
-function get_height(temperature) {
-    return -4 * temperature + 400;
-}
+// TODO find good value for f0
+let f0 = 30; // f0 : cut-off frequency
+let tau = 1 / (2 * Math.PI * f0); // low pass filter time constant
+let limMin = 0;
+let limMax = 1;
+let T = 1 / 60;
+
+let prevIntegrator = 0;
+let prevDifferentiator = 0;
+let prevError = 0;
+let prevMeasurement = 0;
+
+
+let sensor = 0;
+
+
+// const delta_time = 1 / 60;
 
 
 function clamp(value, min, max) {
@@ -71,23 +76,72 @@ function clamp(value, min, max) {
     return value;
 }
 
-function min_max(value, min, max) {
-    if (Math.abs(value - min) < Math.abs(value - max)) {
-        return min;
-    } else {
-        return max;
-    }
+
+function basic(setpoint, measurement) {
+    if (measurement < setpoint) return limMax;
+    return limMin;
 }
 
-function handle_input() {
-    if (pressedKeys[' ']) heat();
+
+function PID(setpoint, measurement) {
+
+    // error
+    const error = setpoint - measurement;
+
+    // console.log(measurement);
+
+    // Proportional
+    const proportional = Number(K_p.value) * error;
+
+    // Integrator
+    let integrator = prevIntegrator + 0.5 * Number(K_i.value) * T * (error + prevError);
+
+    // anti-wind-up via dynamic integrator clamping
+    let limMinInt; // min limit of the integrator
+    let limMaxInt;
+
+    if (limMax > proportional) {
+        limMaxInt = limMax - proportional;
+    } else {
+        limMaxInt = 0;
+    }
+
+    if (limMin < proportional) {
+        limMinInt = limMin - proportional;
+    } else {
+        limMinInt = 0;
+    }
+
+    integrator = clamp(integrator, limMinInt, limMaxInt);
+
+    // Differentiator (derivative on measurement and not on the error !!! because otherwise we can have a kick problem)
+    let differentiator = 2 * Number(K_d.value) * (measurement - prevMeasurement);
+    differentiator += (2 * tau - T) * prevDifferentiator;
+    differentiator /= (2 * tau + T);
+
+    let out = proportional + integrator + differentiator;
+    out = clamp(out, limMin, limMax);
+
+    prevIntegrator = integrator;
+    prevDifferentiator = differentiator;
+    prevError = error;
+    prevMeasurement = measurement;
+
+    return out;
 }
+
+
+
+function get_height(temperature) {
+    return -4 * temperature + 400;
+}
+
 
 
 function update_sensor() {
     // sensor = temperature;
     const length = temperature_history.array.length;
-    sensor = temperature_history.array[length - 1 - Number(sensor_delay.value)];
+    sensor = temperature_history.array[length - 1 - Number(sensor_delay.value)] || 0;
 }
 
 
@@ -96,40 +150,6 @@ function update_temperature() {
     temperature = clamp(temperature, 0, 100);
     temperature_history.push(temperature);
 }
-
-
-function control() {
-    if (sensor == undefined) return;
-
-    const error = Number(target.value) - sensor;
-
-    // porportional term
-    const proportional = Number(K_p.value) * error;
-
-    // intergral term
-    let integral = 0;
-    for (const error_t of error_history.array) integral += error_t * delta_time;
-    integral *= Number(K_i.value);
-
-    // derivative term
-    const last_error = error_history.array[error_history.array.length - 1] || 0;
-    const delta_error = error - last_error;
-    const derivative = Number(K_d.value) * delta_error / delta_time;
-
-    const signal = proportional + integral + derivative;
-
-    let output = 0;
-    if (heater_mode.value == 'all_or_nothing') {
-        output = min_max(signal, 0, Number(max_heating_speed.value));
-    } else if (heater_mode.value == 'gradual') {
-        output = clamp(signal, 0, Number(max_heating_speed.value));
-    }
-
-    error_history.push(error);
-    temperature += output;
-
-}
-
 
 
 function draw_gauge() {
@@ -175,12 +195,8 @@ function draw_graph() {
     ctx.lineWidth = 2;
     ctx.beginPath();
 
-    /* for (let index in temperature_history.array) {
-        const temperature = temperature_history.array[length - 1 - index];
-        ctx.lineTo(800 - (1 * index), 100 + get_height(temperature));
-    } */
 
-    for (let index = 0; index < Math.min(length, max_displayed_points); index++) {
+    for (let index = 0; index < length; index++) {
         const temperature = temperature_history.array[length - 1 - index];
         ctx.lineTo(800 - (1 * index), 100 + get_height(temperature));
     }
@@ -223,10 +239,14 @@ function toggle_pause() {
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     update_sensor()
-    handle_input();
-    control();
+
+    if (mode.value == 'pid') temperature += PID(Number(target.value), sensor);
+    else if (mode.value == 'basic') temperature += basic(Number(target.value), sensor)
+
+
     update_temperature();
     draw();
+
     if (!pause) window.requestAnimationFrame(gameLoop);
 }
 
