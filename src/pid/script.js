@@ -12,6 +12,7 @@ const cooling_factor = document.getElementById("cooling_factor");
 const K_p = document.getElementById("K_p");
 const K_i = document.getElementById("K_i");
 const K_d = document.getElementById("K_d");
+const tau = document.getElementById("tau");
 const heater_mode = document.getElementById("heater_mode");
 
 const canvas = document.getElementById("canvas");
@@ -27,9 +28,7 @@ class MaxLengthArray {
 
     push(element) {
         this.array.push(element);
-        if (this.array.length > this.max_length) {
-            this.array.shift();
-        }
+        if (this.array.length > this.max_length) this.array.shift();
     }
 }
 
@@ -46,7 +45,8 @@ sensor_delay.value = 20;
 cooling_factor.value = 0.1;
 K_p.value = 0.05;
 K_i.value = 0.05;
-K_d.value = 0.0;
+K_d.value = 0.05;
+tau.value = 20;
 
 const gradient = ctx.createLinearGradient(0, 0, 0, 400);
 gradient.addColorStop(0, "red");
@@ -54,8 +54,8 @@ gradient.addColorStop(1, "LightGreen");
 
 
 // TODO find good value for f0
-let f0 = 30; // f0 : cut-off frequency
-let tau = 1 / (2 * Math.PI * f0); // low pass filter time constant
+// let f0 = 30; // f0 : cut-off frequency
+// let tau = 1 / (2 * Math.PI * f0); // low pass filter time constant
 let limMin = 0;
 let limMax = 1;
 let T = 1 / 60; // period (or time delta between two samples)
@@ -68,6 +68,16 @@ let prevMeasurement = 0;
 let sensor = 0;
 
 
+
+let pressedKeys = {};
+document.onkeydown = (e) => { pressedKeys[e.key] = true; }
+document.onkeyup = (e) => { pressedKeys[e.key] = false; }
+
+
+function handle_input() {
+    if (pressedKeys['ArrowUp']) temperature += 0.3;
+    if (pressedKeys['ArrowDown']) temperature -= 0.3;
+}
 
 
 function clamp(value, min, max) {
@@ -116,8 +126,8 @@ function PID(setpoint, measurement) {
 
     // Differentiator (derivative on measurement and not on the error !!! because otherwise we can have a kick problem)
     let differentiator = 2 * Number(K_d.value) * (measurement - prevMeasurement);
-    differentiator += (2 * tau - T) * prevDifferentiator;
-    differentiator /= (2 * tau + T);
+    differentiator += (2 * Number(tau.value) - T) * prevDifferentiator;
+    differentiator /= (2 * Number(tau.value) + T);
 
     let out = proportional + integrator + differentiator;
     out = clamp(out, limMin, limMax);
@@ -199,13 +209,10 @@ function draw_graph() {
     ctx.strokeStyle = 'green';
     ctx.lineWidth = 2;
     ctx.beginPath();
-
-
     for (let index = 0; index < length; index++) {
         const temperature = temperature_history.array[length - 1 - index];
         ctx.lineTo(800 - (1 * index), 100 + get_height(temperature));
     }
-
     ctx.stroke();
 
     // draw target
@@ -252,7 +259,8 @@ function toggle_pause() {
 function gameLoop() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (mode.value == 'pid') temperature += PID(Number(target.value), sensor);
-    else if (mode.value == 'basic') temperature += basic(Number(target.value), sensor)
+    else if (mode.value == 'basic') temperature += basic(Number(target.value), sensor);
+    handle_input();
     update_temperature();
     update_sensor();
     update_time();
