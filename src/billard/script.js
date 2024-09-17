@@ -126,17 +126,17 @@ function mainLoop() {
     ctx.stroke();
 
     ctx.beginPath();
-    ctx.arc(150, 300, 2, 0, 2 * Math.PI);
+    ctx.arc(300, 300, 2, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(150, 225, 2, 0, 2 * Math.PI);
+    ctx.arc(300, 225, 2, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
     ctx.fill();
 
     ctx.beginPath();
-    ctx.arc(1050, 300, 2, 0, 2 * Math.PI);
+    ctx.arc(900, 300, 2, 0, 2 * Math.PI);
     ctx.fillStyle = "white";
     ctx.fill();
 
@@ -165,9 +165,9 @@ function mainLoop() {
     requestAnimationFrame(mainLoop);
 }
 
-balls.push(new Ball(150, 225, 15, "white"));
-balls.push(new Ball(150, 300, 15, "white"));
-balls.push(new Ball(1050, 300, 15, "red"));
+balls.push(new Ball(300, 225, 15, "white"));
+balls.push(new Ball(300, 300, 15, "white"));
+balls.push(new Ball(900, 300, 15, "red"));
 // balls.push(new Ball(250, 400, 30, "red"));
 // balls.push(new Ball(340, 400, 30, "red"));
 
