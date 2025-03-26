@@ -1,0 +1,28 @@
+\documentclass[12pt]{article}
+\begin{document}
+	\section{differential equation}
+	
+	lets consider a 2nd degree ordinary differential equation
+	
+	$$
+	\ddot{\theta} \quad = \quad f(\dot{\theta}, \theta)
+	$$
+	
+	We can approximate solutions to this equation as follows for $n \in [0, \infty[$:
+	
+	$$
+	\theta_n \quad \approx \quad \theta_{n-1} \ + \ \dot{\theta}_{n-1} \Delta t
+	$$
+	
+	$$
+	\dot{\theta}_n \quad \approx \quad \dot{\theta}_{n-1} \ + \ \ddot{\theta}_{n-1} \Delta t
+	$$
+	
+	$$
+	\ddot{\theta}_n \quad = \quad f(\dot{\theta}_n, \theta_n)
+	$$
+	
+	The smaller the time interval $\Delta t$, the more accurate the approximation should be.
+	
+	We just need initial conditions for $\theta_0$ and $\dot{\theta}_0$ and then we can start with the algorithm.
+\end{document}

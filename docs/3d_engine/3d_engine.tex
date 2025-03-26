@@ -1,0 +1,179 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\geometry{margin=0.75in}
+\setlength{\parindent}{0pt}
+\begin{document}
+
+\section{translation, rotation, scaling}
+
+We consider a left-handed coordinate system.
+
+$$ v' \quad = \quad v \ * \ M $$
+
+\begin{itemize}
+\item v' : output vertex
+\item v : input vertex
+\item M : matrix (translation, rotation, scaling, ...)
+\end{itemize}
+
+\subsection {translation matrix}
+
+$$
+T = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+tx & ty & tz & 1
+\end{bmatrix}
+$$
+
+\subsection {scaling matrix}
+
+$$
+S = 
+\begin{bmatrix}
+sx & 0 & 0 & 0 \\
+0 & sy & 0 & 0 \\
+0 & 0 & sz & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\subsection {rotation matrix around x-axis}
+
+$$
+R_x = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & cos(n) & sin(n) & 0 \\
+0 & -sin(n) & cos(n) & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\subsection {rotation matrix around y-axis}
+
+$$
+R_y = 
+\begin{bmatrix}
+cos(n) & 0 & -sin(n) & 0 \\
+0 & 1 & 0 & 0 \\
+sin(n) & 0 & cos(n) & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\subsection {rotation matrix around z-axis}
+
+$$
+R_z = 
+\begin{bmatrix}
+cos(n) & sin(n) & 0 & 0 \\
+-sin(n) & cos(n) & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\newpage
+
+\section{camera and clip space}
+
+\subsection {translation matrix}
+
+$$
+T = 
+\begin{bmatrix}
+1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+-x & -y & -z & 1
+\end{bmatrix}
+$$
+
+$(x, y, z)$ : camera position
+
+\subsection {rotation matrix}
+
+$$
+R = 
+\begin{bmatrix}
+r.x & u.x & f.x & 0 \\
+r.y & u.y & f.y & 0 \\
+r.z & u.z & f.z & 0 \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+$$
+
+\begin{itemize}
+\item r.x : x coordinates of r vector
+\item r : right camera orientation $(1, 0, 0, 1)$
+\item u : up camera orientation $(0, 1, 0, 1)$
+\item f : forward camera orientation $(0, 0, 1, 1)$
+\end{itemize}
+
+\subsection {camera matrix}
+
+$$
+CM \quad = \quad T \ * \ R
+$$
+
+
+\subsection {projection matrix}
+
+$$
+P = 
+\begin{bmatrix}
+\frac{2}{right - left} & 0 & 0 & 0 \\
+0 & \frac{2}{top - bottom} & 0 & 0 \\
+0 & 0 & \frac{far + near}{far - near} & 1 \\
+0 & 0 & \frac{-2 . near . far}{far - near} & 0
+\end{bmatrix}
+$$
+
+\begin{itemize}
+\item $h_{fov} = \pi / 3$
+\item $v_{fov} = h_{fov} * \frac{height_{screen}}{width_{screen}}$
+\item near plane = 0.1
+\item far plane = 100
+\item right = $tan(h_{fov} / 2)$
+\item left = - right
+\item top = $tan(v_{fov} / 2)$
+\item bottom = - top
+\end{itemize}
+
+\newpage
+
+\section{normalized clipping space (NDC) projection}
+
+$$ v_{p} \quad = \quad v \ * \ CM \ * \ P $$
+
+$$ v_{pn} \quad = \quad v_{p} \ / \ v_{p}.w  $$
+
+\begin{itemize}
+\item $v$ : vertex
+\item $v_{p}$ : vertex projected
+\item $v_{pn}$ : vertex projected and normalized
+\end{itemize}
+
+if one of the x,y,z coordinates of the $v_{pn}$ is outside $[-1, 1]$, then the vertex is off screen and must not be rendered. 
+
+\section{screen projection}
+
+\subsection{screen matrix}
+
+$$
+SC =
+\begin{bmatrix}
+\frac{width_{screen}}{2} & 0 & 0 & 0 \\
+0 & - \frac{height_{screen}}{2} & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+\frac{width_{screen}}{2} & \frac{height_{screen}}{2} & 0 & 1
+\end{bmatrix}
+$$
+
+$$v_s \quad = \quad v_{pn} \ * \ SC $$
+\end{document}

@@ -1,0 +1,79 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{multicol}
+\geometry{margin=0.75in}
+\setlength{\parindent}{0pt}
+\begin{document}
+
+\section{2D rigid body}
+
+To model the 2d rigid body, we will start from a 2D polygon made of n points.
+
+Each point will have a position and a mass.
+
+We can get the total mass of the rigid body by summing the mass of its points :
+$$ m = \sum m_i $$
+
+We can get the center of mass of the rigid body as such :
+$$ \bar{R} = \frac{\sum m_i \bar{r}_i}{\sum m_i} $$
+
+We can get the moment of inertia of the rigid body as such :
+$$ I = \sum m_i r_i^2$$
+
+Now we can give initial conditions to the rigid body, namely :
+
+\begin{itemize}
+\item $\bar{r}_0$ : initial position
+\item $\bar{v}_0$ : initial velocity
+\item $\theta_0$ : initial angle
+\item $\omega_0$ : initial angular velocity
+\end{itemize}
+
+We have the following relationships :
+
+
+
+\begin{multicols}{2}
+in the continous domain
+$$ \bar{a} = \frac{d \bar{v}}{dt}$$
+$$ \bar{v} = \frac{d \bar{r}}{dt}$$
+$$ \alpha = \frac{d \omega}{dt}$$
+$$ \omega = \frac{d \theta}{dt}$$
+\columnbreak
+
+in the discrete domain
+$$ \bar{a} = \frac{\Delta \bar{v}}{\Delta t}$$
+$$ \bar{v} = \frac{\Delta \bar{r}}{\Delta t}$$
+$$ \alpha = \frac{\Delta \omega}{\Delta t}$$
+$$ \omega = \frac{\Delta \theta}{\Delta t}$$
+\end{multicols}
+
+Each cycle of the physics loop, we can apply forces on the rigid body :
+
+$$ \bar{F} = m \bar{a} $$
+
+If the force is applied elsewhere than the center of mass, it will also provoque a torque on the rigid body :
+
+$$ \bar{\tau} = \bar{r} \times \bar{F} $$
+$$ \bar{\tau} = I \bar{\alpha} $$
+
+\newpage
+
+Each cycle of the physics loop, we can know the acceleration on the rigid body, thus its velocity, thus its position as such :
+
+$$ \bar{a} = \frac{\sum \bar{F}}{m} $$
+
+$$ \bar{v}_n = \bar{v}_{n - 1} + \bar{a} \Delta t $$
+
+$$ \bar{r}_n = \bar{r}_{n - 1} + \bar{v}_n \Delta t $$
+
+Each cycle of the physics loop, we can know the angular acceleration on the rigid body, thus its angular velocity, thus its angular position as such :
+
+
+$$ \bar{\alpha} = \frac{\sum \bar{\tau}}{I} $$
+$$ \bar{\omega}_n = \bar{\omega}_{n-1} + \bar{\alpha} \Delta t $$
+$$ \bar{\theta}_n = \bar{\theta}_{n-1} + \bar{\omega}_n \Delta t $$
+
+\end{document}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html">← back to index</a>
+    </header>
+    <main>
+        <div>
+            <h1>Differential equations</h1>
+            <img src="equation.svg" alt="equation" />
+            <br>
+            <div>
+                <input type="number" id="L" name="L" min="0" max="5" step="0.1" onchange="recompute()">
+                <label for="L">L</label>
+            </div>
+            <div>
+                <input type="number" id="mu" name="mu" min="0" max="5" step="0.1" onchange="recompute()">
+                <label for="mu">mu</label>
+            </div>
+            <br>
+            <canvas id="pendulum" width="600" height="300"></canvas>
+            <br>
+            <canvas id="graph" width="600" height="300"></canvas>
+            <br>
+            <button onclick="toggle_pause()">start / pause</button>
+            <button onclick="restart()">restart</button>
+
+            <p>The algorithm to approximate the ODE can be seen <a href="assets/diff_eq.pdf">here</a></p>
+        </div>
+    </main>
+</body>
+
+</html>

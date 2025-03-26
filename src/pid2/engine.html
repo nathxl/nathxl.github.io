@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="pid.js" defer></script>
+    <script src="vector.js" defer></script>
+    <script src="subParticle.js" defer></script>
+    <script src="rigidBody2.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <a href="../../index.html">← back to index</a>
+    </header>
+    <main>
+        <div>
+            <h1>Rigid body + PID</h1>
+            <canvas id="myCanvas" width="1000" height="700"></canvas>
+            <table>
+                <tr>
+                    <th>z, q, s, d</th>
+                    <th>force on center</th>
+                </tr>
+                <tr>
+                    <th>←, ↑, →, ↓</th>
+                    <th>force on target</th>
+                </tr>
+                <tr>
+                    <th>spacebar</th>
+                    <th>change target</th>
+                </tr>
+            </table>
+            <div>
+                <h1>About</h1>
+                in this version, a simpler version of a PID controller was used, inspired by the follwoing
+                <a href="https://github.com/fire/godot-pid/blob/master/PID_Controller/PID_Controller.gd">implementation</a>
+                <br><br>
+                <img src="images/eq.svg" alt="eq" />
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+h1 {
+    color: red;
+}
+
+canvas {
+    border: solid 1px black;
+}
+
+.tables {
+    display: flex;
+    gap: 5rem;
+}
+
+embed {
+    border: solid 1px black;
+}
