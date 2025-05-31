@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../../../libraries/pid.js" defer></script>
+    <script src="../../../libraries/vector3d.js" defer></script>
+    <script src="../../../libraries/rigidBody2.js" defer></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="../../../css/variables.css">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/header.css">
+<link rel="stylesheet" href="../../../css/footer.css">
+<link rel="stylesheet" href="../../../css/cs.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+    <h1>Static portfolio</h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="../../../index.html">index</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+    <main>
+        <div>
+            <h1>Rigid body + PID</h1>
+            <canvas id="myCanvas" width="1000" height="700"></canvas>
+            <table>
+                <tr>
+                    <th>LMB</th>
+                    <th>set target</th>
+                </tr>
+                <tr>
+                    <th>z, q, s, d</th>
+                    <th>force on center</th>
+                </tr>
+                <tr>
+                    <th>i, j, k, l</th>
+                    <th>force on target</th>
+                </tr>
+                <tr>
+                    <th>n</th>
+                    <th>change selected node</th>
+                </tr>
+                <tr>
+                    <th>r</th>
+                    <th>reset</th>
+                </tr>
+            </table>
+            <div>
+                <h1>About</h1>
+                <p>
+                    A <a href="assets/document.pdf">simplified PID controller</a> was used, inspired by the following
+                    <a href="https://github.com/fire/godot-pid/blob/master/PID_Controller/PID_Controller.gd">implementation</a>
+                </p>
+            </div>
+        </div>
+    </main>
+    <footer>
+    <h1>footer</h1>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../../../css/style.css">
+    <link rel="stylesheet" href="style.css"> -->
+
+    <link rel="stylesheet" href="../../../css/variables.css">
+<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../css/header.css">
+<link rel="stylesheet" href="../../../css/footer.css">
+<link rel="stylesheet" href="../../../css/cs.css">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="../../../libraries/vector3d.js" defer></script>
+    <script src="../../../libraries/rigidBody2.js" defer></script>
+    <script src="script.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+    <h1>Static portfolio</h1>
+    <nav>
+        <ul>
+            <li>
+                <a href="../../../index.html">index</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+    <main>
+        <div>
+            <h1>Rigid body engine</h1>
+            <canvas id="myCanvas" width="500" height="500"></canvas>
+            <table>
+                <tr>
+                    <th>z, q, s, d</th>
+                    <th>force on center</th>
+                </tr>
+                <tr>
+                    <th>←, ↑, →, ↓</th>
+                    <th>force on target</th>
+                </tr>
+                <tr>
+                    <th>spacebar</th>
+                    <th>change target</th>
+                </tr>
+            </table>
+
+            <p><a href="assets/rigid_body.pdf">math</a> behind the rigid body physics engine</p>
+            
+        </div>
+    </main>
+    <footer>
+    <h1>footer</h1>
+</footer>
+</body>
+
+</html>

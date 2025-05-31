@@ -1,0 +1,19 @@
+\documentclass[12pt]{article}
+\setlength{\parindent}{0cm}
+\begin{document}
+	\section{simplified PID}
+
+	$ e[n] = setpoint [n] - measurement[n] $
+	
+	$ p_{out} = K_p . e[n] $ \\
+	
+	$ i[n] = i[n-1] + e[n] . dt $
+	
+	$ i_{iout} = K_i . i[n] $ \\
+	
+	$ d_{out} = K_d . (e[n] - e[n-1]) / dt $ \\
+	
+	$ out = p_{out} + i_{out} + d_{out} $
+	
+	$ i[n] = clamp(i[n], min, max) $
+\end{document}

@@ -33,6 +33,10 @@ class Vector2D {
         return new Vector2D(this.x, this.y).divide(this.magnitude());
     }
 
+    normal() {
+        return new Vector2D(this.y, -this.x);
+    }
+
     angle_with(vector) {
         let angle = Math.acos(this.dot_product(vector) / (this.magnitude() * vector.magnitude()));
         if (this.y < 0) angle = 2 * Math.PI - angle;

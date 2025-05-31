@@ -1,0 +1,42 @@
+
+header {
+    position: sticky;
+    top: 0;
+    
+    padding: 1rem 15%;
+
+    background-color: var(--bg);
+    box-shadow: var(--shadow);
+
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+}
+
+
+ul {
+    list-style: none;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+li {
+    display: flex;
+}
+
+nav a {
+    color: white;
+    background-color: rgb(28, 100, 145);
+    padding: 0.75rem 1.25rem;
+
+    text-decoration: none;
+
+    border-radius: 0.25rem;
+
+}
+
+nav a:hover {
+    background-color: rgb(21, 76, 110);
+}
