@@ -32,45 +32,58 @@
     </nav>
 </header>
     <main>
-        <div>
+        <div class="outer-container">
             <h1>Path following</h1>
+            <p>A path following system developed with game ideas in mind.</p>
+            <div class="inner-container">
+                <div>
+                    <label for="mode">Mode</label>
+                    <select id="mode">
+                        <option value="target">target</option>
+                        <option value="place_block">place block</option>
+                    </select>
+                </div>
+    
+                <canvas id="canvas" width="400" height="400"></canvas> <!-- should be 400, 400 -->
+    
+                <table>
+                    <tr>
+                        <th>
+                            <label for="heuristics">Heuristics</label>
+                        </th>
+                        <th>
+                            <select id="heuristics">
+                                <option value="manhattan">Manhattan</option>
+                                <option value="chebyshev">Chebyshev</option>
+                            </select>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <label for="neighbors">Neighbors</label>
+                        </th>
+                        <th>
+                            <select id="neighbors">
+                                <option value="4">4 neighbors</option>
+                                <option value="8A">8 neighbors A</option>
+                                <option value="8B">8 neighbors B</option>
+                                <option value="8C">8 neighbors C</option>
+                            </select>
+                        </th>
+                    </tr>
+                </table>
 
-            <div>
-                <label for="mode">Mode</label>
-                <select id="mode">
-                    <option value="target">target</option>
-                    <option value="place_block">place block</option>
-                </select>
+                <div class="tables">
+                    <table>
+                        <tr>
+                            <th>shift</th>
+                            <th>queue commands</th>
+                        </tr>
+                    </table>
+                </div>
             </div>
 
-            <canvas id="canvas" width="500" height="500"></canvas> <!-- should be 400, 400 -->
-
-            <table>
-                <tr>
-                    <th>
-                        <label for="heuristics">Heuristics</label>
-                    </th>
-                    <th>
-                        <select id="heuristics">
-                            <option value="manhattan">Manhattan</option>
-                            <option value="chebyshev">Chebyshev</option>
-                        </select>
-                    </th>
-                </tr>
-                <tr>
-                    <th>
-                        <label for="neighbors">Neighbors</label>
-                    </th>
-                    <th>
-                        <select id="neighbors">
-                            <option value="4">4 neighbors</option>
-                            <option value="8A">8 neighbors A</option>
-                            <option value="8B">8 neighbors B</option>
-                            <option value="8C">8 neighbors C</option>
-                        </select>
-                    </th>
-                </tr>
-            </table>
+            
         </div>
     </main>
     <footer>

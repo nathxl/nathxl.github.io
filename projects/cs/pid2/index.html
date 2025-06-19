@@ -29,38 +29,42 @@
     </nav>
 </header>
     <main>
-        <div>
+        <div class="outer-container">
             <h1>Rigid body + PID</h1>
-            <canvas id="myCanvas" width="1000" height="700"></canvas>
-            <table>
-                <tr>
-                    <th>LMB</th>
-                    <th>set target</th>
-                </tr>
-                <tr>
-                    <th>z, q, s, d</th>
-                    <th>force on center</th>
-                </tr>
-                <tr>
-                    <th>i, j, k, l</th>
-                    <th>force on target</th>
-                </tr>
-                <tr>
-                    <th>n</th>
-                    <th>change selected node</th>
-                </tr>
-                <tr>
-                    <th>r</th>
-                    <th>reset</th>
-                </tr>
-            </table>
-            <div>
-                <h1>About</h1>
-                <p>
-                    A <a href="assets/document.pdf">simplified PID controller</a> was used, inspired by the following
-                    <a href="https://github.com/fire/godot-pid/blob/master/PID_Controller/PID_Controller.gd">implementation</a>
-                </p>
+            <p>Combination of the aforementioned rigid body engine and 3 PID controllers to control moon lander with 2 boosters.</p>
+            <div class="inner-container">
+                <canvas id="myCanvas" width="800" height="600"></canvas>
+                <table>
+                    <tr>
+                        <th>LMB</th>
+                        <th>set target</th>
+                    </tr>
+                    <tr>
+                        <th>z, q, s, d</th>
+                        <th>force on center</th>
+                    </tr>
+                    <tr>
+                        <th>i, j, k, l</th>
+                        <th>force on target</th>
+                    </tr>
+                    <tr>
+                        <th>n</th>
+                        <th>change selected node</th>
+                    </tr>
+                    <tr>
+                        <th>r</th>
+                        <th>reset</th>
+                    </tr>
+                </table>
+                <div>
+                    <h1>About</h1>
+                    <p>
+                        A <a href="assets/document.pdf">simplified PID controller</a> was used, inspired by the following
+                        <a href="https://github.com/fire/godot-pid/blob/master/PID_Controller/PID_Controller.gd">implementation</a>
+                    </p>
+                </div>
             </div>
+            
         </div>
     </main>
     <footer>

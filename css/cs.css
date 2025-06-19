@@ -5,7 +5,28 @@ main {
     padding: 3rem;
 }
 
-main>* {
+.outer-cotnainer {
+
+}
+
+.inner-container {
+    border-radius: 0.5rem;
+
+    background-color: var(--bg);
+    box-shadow: var(--shadow);
+
+    padding: 3rem;
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+
+
+/* main>* {
     border-radius: 0.5rem;
 
     background-color: var(--bg);
@@ -19,8 +40,7 @@ main>* {
     gap: 1rem;
     align-items: flex-start;
 
-    /* border: solid 1px red; */
-}
+} */
 
 canvas {
     background-color: white;

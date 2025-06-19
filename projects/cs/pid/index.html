@@ -26,98 +26,98 @@
     </nav>
 </header>
     <main>
-        <div class="content">
+        <div class="outer-container">
             <h1>PID controller</h1>
-
-            <div class="panel">
-                <div>
-
-                    <canvas id="canvas" width="1000" height="600"></canvas>
+            <p>Use of a PID algorithm to control water temperature in a simulated water tank using a simple heating element and comparision with more basic approach to show the need for the PID algorithm.</p>
+            <div class="inner-container">
+                <div class="panel">
+                    <div>
+    
+                        <canvas id="canvas" width="1000" height="600"></canvas>
+                    </div>
+                    <table>
+                        <tr>
+                            <th>
+                                <select name="mode" id="mode">
+                                    <option value="off">Off</option>
+                                    <option value="basic">Basic</option>
+                                    <option value="pid">PID</option>
+                                </select>
+                            </th>
+                            <th>mode</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <select name="heater_mode" id="heater_mode">
+                                    <option value="gradual">gradual</option>
+                                    <option value="all_or_nothing">all or nothing</option>
+                                </select>
+                            </th>
+                            <th>heater mode</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="range" id="target" name="target" min="0" max="100" />
+                            </th>
+                            <th>target temperature</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="range" id="cooling_factor" name="cooling_factor" min="0" max="1" step="0.1" />
+                            </th>
+                            <th>cooling factor</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="range" id="max_heating_speed" name="max_heating_speed" min="0" max="1"
+                                    step="0.1" />
+                            </th>
+                            <th>max heating speed</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="number" id="sensor_delay" name="sensor_delay" min="0" max="100" step="1" />
+                            </th>
+                            <th>sensor delay in frames (60 fps)</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="number" id="K_p" name="K_p" min="0" max="10" step="0.001" />
+                            </th>
+                            <th>K_p</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="number" id="K_i" name="K_i" min="0" max="10" step="0.001" />
+                            </th>
+                            <th>K_i</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="number" id="K_d" name="K_d" min="0" max="10" step="0.001" />
+                            </th>
+                            <th>K_d</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="number" id="tau" name="tau" min="0" max="10" step="0.001" />
+                            </th>
+                            <th>tau</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button onclick="toggle_pause()">pause</button>
+                            </th>
+                            <th>pause</th>
+                        </tr>
+                    </table>
                 </div>
-                <table>
-                    <tr>
-                        <th>
-                            <select name="mode" id="mode">
-                                <option value="off">Off</option>
-                                <option value="basic">Basic</option>
-                                <option value="pid">PID</option>
-                            </select>
-                        </th>
-                        <th>mode</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <select name="heater_mode" id="heater_mode">
-                                <option value="gradual">gradual</option>
-                                <option value="all_or_nothing">all or nothing</option>
-                            </select>
-                        </th>
-                        <th>heater mode</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="range" id="target" name="target" min="0" max="100" />
-                        </th>
-                        <th>target temperature</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="range" id="cooling_factor" name="cooling_factor" min="0" max="1" step="0.1" />
-                        </th>
-                        <th>cooling factor</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="range" id="max_heating_speed" name="max_heating_speed" min="0" max="1"
-                                step="0.1" />
-                        </th>
-                        <th>max heating speed</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="number" id="sensor_delay" name="sensor_delay" min="0" max="100" step="1" />
-                        </th>
-                        <th>sensor delay in frames (60 fps)</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="number" id="K_p" name="K_p" min="0" max="10" step="0.001" />
-                        </th>
-                        <th>K_p</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="number" id="K_i" name="K_i" min="0" max="10" step="0.001" />
-                        </th>
-                        <th>K_i</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="number" id="K_d" name="K_d" min="0" max="10" step="0.001" />
-                        </th>
-                        <th>K_d</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="number" id="tau" name="tau" min="0" max="10" step="0.001" />
-                        </th>
-                        <th>tau</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <button onclick="toggle_pause()">pause</button>
-                        </th>
-                        <th>pause</th>
-                    </tr>
-                </table>
+    
+                <p>
+                    inspired by the following <a href="https://www.youtube.com/watch?v=zOByx3Izf5U">video</a>
+                </p>
+                <p><a href="assets/document.pdf">Math</a> behind the PID controller</p>
             </div>
-
-            <p>
-                inspired by the following <a href="https://www.youtube.com/watch?v=zOByx3Izf5U">video</a>
-            </p>
-            <p><a href="assets/document.pdf">Math</a> behind the PID controller</p>
-
-
         </div>
     </main>
     <footer>

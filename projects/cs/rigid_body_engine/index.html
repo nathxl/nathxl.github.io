@@ -32,25 +32,29 @@
     </nav>
 </header>
     <main>
-        <div>
+        <div class="outer-container">
             <h1>Rigid body engine</h1>
-            <canvas id="myCanvas" width="500" height="500"></canvas>
-            <table>
-                <tr>
-                    <th>z, q, s, d</th>
-                    <th>force on center</th>
-                </tr>
-                <tr>
-                    <th>←, ↑, →, ↓</th>
-                    <th>force on target</th>
-                </tr>
-                <tr>
-                    <th>spacebar</th>
-                    <th>change target</th>
-                </tr>
-            </table>
-
-            <p><a href="assets/rigid_body.pdf">math</a> behind the rigid body physics engine</p>
+            <p>Physics engine enabling rigid bodies written in JS </p>
+            <div class="inner-container">
+                <canvas id="myCanvas" width="500" height="500"></canvas>
+                <table>
+                    <tr>
+                        <th>z, q, s, d</th>
+                        <th>force on center</th>
+                    </tr>
+                    <tr>
+                        <th>←, ↑, →, ↓</th>
+                        <th>force on target</th>
+                    </tr>
+                    <tr>
+                        <th>spacebar</th>
+                        <th>change target</th>
+                    </tr>
+                </table>
+    
+                <p><a href="assets/rigid_body.pdf">math</a> behind the rigid body physics engine</p>
+            </div>
+            
             
         </div>
     </main>

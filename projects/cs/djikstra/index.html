@@ -29,26 +29,29 @@
     </nav>
 </header>
     <main>
-        <div>
+        <div class="outer-container">
             <h1>djikstra</h1>
+            <p>Pathfinding using a Djikstra algorithm inspired from <a href="https://github.com/andrewhayward/dijkstra/blob/master/graph.js">here</a>.</p>
 
-            <div class="buttons">
-                <button id="move_button" class="pressed button" onclick="activate_move_mode()">
-                    <img src="./cursor-icon.svg" alt="cursor" width="15" height="15">
-                    <span>Move</span>
-                </button>
-                <button id="add_point_button" class="depressed button" onclick="activate_add_point_mode()"><span
-                        class="dot bg-gray"></span>Add point</button>
-                <button id="add_arc_button" class="depressed button" onclick="activate_add_arc_mode()">
-                    <img src="./right_arrow.svg" alt="right_arrow" width="15" height="15">
-                    <span>Add arc</span>
-                </button>
-                <button id="set_start_button" class="depressed button" onclick="activate_set_start_mode()"><span
-                        class="dot bg-limegreen"></span>Set start</button>
-                <button id="set_target_button" class="depressed button" onclick="activate_set_target_mode()"><span
-                        class="dot bg-crimson"></span>Set target</button>
+            <div class="inner-container">
+                <div class="buttons">
+                    <button id="move_button" class="pressed button" onclick="activate_move_mode()">
+                        <img src="./cursor-icon.svg" alt="cursor" width="15" height="15">
+                        <span>Move</span>
+                    </button>
+                    <button id="add_point_button" class="depressed button" onclick="activate_add_point_mode()"><span
+                            class="dot bg-gray"></span>Add point</button>
+                    <button id="add_arc_button" class="depressed button" onclick="activate_add_arc_mode()">
+                        <img src="./right_arrow.svg" alt="right_arrow" width="15" height="15">
+                        <span>Add arc</span>
+                    </button>
+                    <button id="set_start_button" class="depressed button" onclick="activate_set_start_mode()"><span
+                            class="dot bg-limegreen"></span>Set start</button>
+                    <button id="set_target_button" class="depressed button" onclick="activate_set_target_mode()"><span
+                            class="dot bg-crimson"></span>Set target</button>
+                </div>
+                <canvas id="canvas" width="600" height="500"></canvas>
             </div>
-            <canvas id="canvas" width="600" height="500"></canvas>
         </div>
     </main>
     <footer>
