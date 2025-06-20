@@ -48,10 +48,10 @@ function handleInput(rigidBody) {
 
     // direction
     let direction2 = new Vector3D(0, 0, 0)
-    if (pressedKeys['ArrowLeft']) direction2.x -= 1;
-    if (pressedKeys['ArrowRight']) direction2.x += 1;
-    if (pressedKeys['ArrowUp']) direction2.y -= 1;
-    if (pressedKeys['ArrowDown']) direction2.y += 1;
+    if (pressedKeys['j']) direction2.x -= 1;
+    if (pressedKeys['l']) direction2.x += 1;
+    if (pressedKeys['i']) direction2.y -= 1;
+    if (pressedKeys['k']) direction2.y += 1;
     const force2 = direction2.unit().multiply(inputForce);
     const location = rigidBody.subParticles[rigidBody.selectedParticle].r.rotateAroundZ(rigidBody.theta);
     rigidBody.applyForce(ctx, location, force2);
