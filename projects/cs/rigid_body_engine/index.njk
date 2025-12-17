@@ -1,0 +1,47 @@
+---
+layout: layouts/base.njk
+title: Rigid body engine
+css:
+  - /css/style.css
+  - /css/cs.css
+  - ./style.css
+local_css:
+js_defer:
+  - /libraries/vector3d.js
+  - /libraries/rigidBody2.js
+  - script.js
+---
+
+<div class="outer-container">
+    <div>
+        <h1>Rigid body engine</h1>
+        <p>
+            Physics engine enabling rigid body simulation written in JS.
+            <br>
+            <a href="assets/rigid_body.pdf">PDF</a> of the math behind the rigid body physics engine.
+        </p>
+        <hr>
+    </div>
+    <div class="inner-container">
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+        <table>
+            <tr>
+                <th>z, q, s, d</th>
+                <th>force on center</th>
+            </tr>
+            <tr>
+                <th>i, j, k, l</th>
+                <th>force on target</th>
+            </tr>
+            <tr>
+                <th>spacebar</th>
+                <th>change target</th>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <hr>
+    </div>
+
+</div>

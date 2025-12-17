@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
+        <link rel="stylesheet" href="/css/style.css">
+
+        {% for file in css %}
+            <link rel="stylesheet" href="{{ file }}">
+        {% endfor %}
+
+        {% for script in js_defer %}
+            <script src="{{ script }}" defer></script>
+        {% endfor %}
+
+        <title>{{ title }}</title>
+    </head>
+
+    <body>
+        {% include "header.njk" %}
+        <main>
+            {{ content | safe }}
+        </main>
+        {% include "footer.njk" %}
+    </body>
+</html>

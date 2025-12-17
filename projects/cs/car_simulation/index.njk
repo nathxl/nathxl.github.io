@@ -1,0 +1,33 @@
+---
+layout: layouts/base.njk
+title: Car simulation
+css:
+  - ./style.css
+local_css:
+js_defer:
+  - /libraries/vector3d.js
+  - /libraries/rigidBody2.js
+  - wheel.js
+  - car.js
+  - script.js
+---
+
+<div class="outer-container">
+  <div>
+    <h1>Car simulation</h1>
+    <p>The <a href="/projects/cs/rigid_body_engine/index.html">rigid body engine</a> was expanded to enable simulation of a car.</p>
+    <hr>
+  </div>
+  <div class="inner-container">
+    <canvas id="myCanvas" width="700" height="700"></canvas>
+    <table>
+      <tr>
+        <th>z, q, s, d</th>
+        <th>move</th>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <hr>
+  </div>
+</div>

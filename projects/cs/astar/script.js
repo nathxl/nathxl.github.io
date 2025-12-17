@@ -30,15 +30,16 @@ let end_y = 9;
 
 
 canvas.addEventListener("mousedown", (event) => {
-    const rect = canvas.getBoundingClientRect();
-    const border_width = (canvas.offsetWidth - canvas.width) / 2;
-    const x = event.x - (rect.left + border_width);
-    const y = event.y - (rect.top + border_width);
+    const rect = canvas.getBoundingClientRect();  
+
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
 
 
     if (x > 0 && y > 0 && x < tile_size * map[0].length && y < tile_size * map.length) {
-        const col = parseInt(x / tile_size);
-        const row = parseInt(y / tile_size);
+        const col = parseInt(x / tile_size * (canvas.width / rect.width));
+        const row = parseInt(y / tile_size * (canvas.height / rect.height));
 
         if (mode.value == 'place_block') {
             if (map[row][col] == 0) {

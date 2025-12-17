@@ -142,6 +142,9 @@ function mainLoop() {
 
     handleInput(balls[0]);
 
+    ctx.fillStyle = "#2A80A8";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     draw_lines();
     draw_dots();
 
