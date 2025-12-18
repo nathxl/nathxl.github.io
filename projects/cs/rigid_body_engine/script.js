@@ -36,8 +36,8 @@ function handleInput(rigidBody) {
     rigidBody.applyForce(ctx, new Vector3D(0, 0, 0), force1);
 
     // spacebar
-    if (pressedKeys[' ']) {
-        pressedKeys[' '] = false;
+    if (pressedKeys['n']) {
+        pressedKeys['n'] = false;
         rb2.selectNextParticle();
     }
 

@@ -56,28 +56,35 @@ class Goto {
     }
 
     draw(context) {
-        if (this.path.length == 0) return;
-
-        // draw path
-        context.strokeStyle = 'blue';
-        context.beginPath();
-        for (const node of this.path) {
-            context.lineTo(node.x, node.y);
+        if (this.initialized) {
+            if (this.path.length == 0) return;
+    
+            // draw path
+            context.strokeStyle = 'blue';
+            context.beginPath();
+            for (const node of this.path) {
+                context.lineTo(node.x, node.y);
+            }
+            context.stroke();
+    
+            // draw first element
+            const first_node = this.path[0];
+            context.fillStyle = 'green';
+            context.beginPath();
+            context.arc(first_node.x, first_node.y, 10, 0, 2 * Math.PI);
+            context.fill();
+    
+            // draw last element
+            const last_node = this.path[this.path.length - 1]
+            context.fillStyle = 'red';
+            context.beginPath();
+            context.arc(last_node.x, last_node.y, 10, 0, 2 * Math.PI);
+            context.fill();
+        } else {
+            context.fillStyle = 'yellow';
+            context.beginPath();
+            context.arc(this.target.x * this.map.tile_size + this.map.tile_size / 2, this.target.y * this.map.tile_size + this.map.tile_size / 2, 10, 0, 2 * Math.PI);
+            context.fill();
         }
-        context.stroke();
-
-        // draw first element
-        const first_node = this.path[0];
-        context.fillStyle = 'green';
-        context.beginPath();
-        context.arc(first_node.x, first_node.y, 10, 0, 2 * Math.PI);
-        context.fill();
-
-        // draw last element
-        const last_node = this.path[this.path.length - 1]
-        context.fillStyle = 'red';
-        context.beginPath();
-        context.arc(last_node.x, last_node.y, 10, 0, 2 * Math.PI);
-        context.fill();
     }
 }

@@ -28,8 +28,12 @@ class Player {
     
 
     draw(context) {
-        if (this.tasks.length != 0) {
+        /* if (this.tasks.length != 0) {
             this.tasks[0].draw(context);
+        } */
+
+        for (const task of this.tasks) {
+            task.draw(context);
         }
 
         context.strokeStyle = 'black';

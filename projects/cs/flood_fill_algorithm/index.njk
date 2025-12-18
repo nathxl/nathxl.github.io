@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+title: Find nearest in grid
+local_css:
+js_defer:
+  - script.js
+---
+
+<div class="outer-container">
+  <div>
+    <h1>Flood fill algorithm</h1>
+    <p>
+      An algorithm used to scan the surrounding cells in search for the closest target.
+    </p>
+    <hr>
+  </div>
+  <div class="inner-container">
+    <div>
+      <button id="find_nearest">Find nearest</button>
+      <select id="mode">
+        <option value="place_start">place start</option>
+        <option value="place_target">place target</option>
+        <option value="place_block">place block</option>
+      </select>
+    </div>
+    <canvas id="canvas" width="600" height="600"></canvas>
+  </div>
+  <div>
+    <hr>
+  </div>
+</div>

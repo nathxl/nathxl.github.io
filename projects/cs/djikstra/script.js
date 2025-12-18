@@ -218,9 +218,15 @@ document.onkeydown = (e) => {
 }
 
 
+
+
+
 canvas.addEventListener("mousedown", (event) => {
+    const rect = canvas.getBoundingClientRect();  
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
     mouse_down = true;
-    mouse_pos = new Vector2D(event.x - mouse_offset_x, event.y - mouse_offset_y);
+    mouse_pos = new Vector2D(x, y);
 
     const selected_node = get_node_clicked();
     const selected_arc = get_arc_clicked();
@@ -283,7 +289,10 @@ canvas.addEventListener("mouseup", (event) => {
 
 
 canvas.addEventListener("mousemove", (event) => {
-    let new_mouse_pos = new Vector2D(event.x - mouse_offset_x, event.y - mouse_offset_y);
+    const rect = canvas.getBoundingClientRect();  
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    let new_mouse_pos = new Vector2D(x, y);
     if (mouse_down) {
         if (mode != 'add_arc') {
             const delta = new_mouse_pos.substract(mouse_pos);

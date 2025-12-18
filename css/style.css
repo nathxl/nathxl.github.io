@@ -79,23 +79,7 @@ canvas {
     user-select: none;
     max-width: 100%;
     background-color: white;
-
-    /* --border-color: orange;
-    --border-width: 1px;
-    background:
-    linear-gradient(to right, var(--border-color) var(--border-width), transparent var(--border-width)) 0 0,
-    linear-gradient(to right, var(--border-color) var(--border-width), transparent var(--border-width)) 0 100%,
-    linear-gradient(to left, var(--border-color) var(--border-width), transparent var(--border-width)) 100% 0,
-    linear-gradient(to left, var(--border-color) var(--border-width), transparent var(--border-width)) 100% 100%,
-    linear-gradient(to bottom, var(--border-color) var(--border-width), transparent var(--border-width)) 0 0,
-    linear-gradient(to bottom, var(--border-color) var(--border-width), transparent var(--border-width)) 100% 0,
-    linear-gradient(to top, var(--border-color) var(--border-width), transparent var(--border-width)) 0 100%,
-    linear-gradient(to top, var(--border-color) var(--border-width), transparent var(--border-width)) 100% 100%;
-    
-    background-repeat: no-repeat;
-    background-size: 5px 5px;
-    background-color: white; */
-
+    box-shadow: 0 0 5px 5px rgb(128, 128, 128, 0.05);
 }
 
 
@@ -104,6 +88,10 @@ canvas {
     flex-direction: column;
     gap: 3rem;
     align-items: center;
+}
+
+table {
+    border: solid 1px rgb(220, 220, 220);
 }
 
 th {
@@ -132,7 +120,7 @@ pre {
     margin: 0;
     font-size: 1rem;
     line-height: 1.185;
-    font-family: "Roboto", sans-serif;
+    /* font-family: "Roboto", sans-serif; */
 
     /* preserve whitespace but allow wrapping */
     white-space: pre-wrap;
@@ -142,4 +130,8 @@ pre {
     
     /* modern, better breaking */
     overflow-wrap: anywhere;
+}
+
+pre > a {
+    text-decoration: none;
 }

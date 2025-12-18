@@ -26,12 +26,55 @@ let pressed_keys = {};
 document.onkeydown = (e) => { pressed_keys[e.key] = true; }
 document.onkeyup = (e) => { pressed_keys[e.key] = false; }
 
+
+let last_mouse_pos = [0, 0];
+let dragging = false;
+canvas.addEventListener("mousedown", (e) => {
+    dragging = true;
+    last_mouse_pos = [e.clientX, e.clientY];
+    console.log(last_mouse_pos);
+});
+
+canvas.addEventListener("mouseup", (e) => {
+    dragging = false;
+});
+
+canvas.addEventListener("mousemove", (e) => {
+    if (!dragging) return;
+    const delta = [e.clientX - last_mouse_pos[0], e.clientY - last_mouse_pos[1]];
+    camera.myPitch(delta[1] * 0.2 * camera.rotation_speed);
+    camera.myYaw(delta[0] * 0.2 * camera.rotation_speed);
+    last_mouse_pos = [e.clientX, e.clientY];
+});
+
+canvas.addEventListener("wheel", (e) => {
+    if (!focused) return;
+    e.preventDefault();
+    if (e.deltaY > 0) {
+        camera.moveDown(0.5);
+    } else {
+        camera.moveUp(0.5);
+    }
+},
+    { passive: false } // REQUIRED
+);
+
+
+let focused = false;
+canvas.addEventListener("focus", () => {
+    focused = true;
+});
+
+canvas.addEventListener("blur", () => {
+    focused = false;
+});
+
 function handle_input() {
     if (pressed_keys['w']) {
-        camera.moveUp();
+        camera.moveUp(0.1);
     }
     if (pressed_keys['x']) {
-        camera.moveDown();
+        camera.moveDown(0.1);
     }
     if (pressed_keys['q']) {
         camera.moveLeft();
@@ -78,7 +121,7 @@ function update() {
     cube.rotate_y(Math.PI / 300);
     // cube.rotate_x(Math.PI / 300);
     // cube.rotate_z(Math.PI / 500);
-    
+
     if (increment > 0) {
         cube.scale(1.003);
     } else {

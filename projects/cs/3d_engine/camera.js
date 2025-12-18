@@ -8,19 +8,20 @@ class Camera {
     near_plane = 0.1;
     far_plane = 100;
 
-    translation_speed = 0.05;
+    translation_speed = 0.1;
+    translation_speed_vertical = 0.5;
     rotation_speed = 0.01;
 
     constructor(x, y, z) {
         this.position = [x, y, z, 1];
     }
 
-    moveUp() {
-        this.position = add_vectors(this.position, multiply_vector_by_scalar(this.up, + this.translation_speed));
+    moveUp(amount) {
+        this.position = add_vectors(this.position, multiply_vector_by_scalar(this.up, + amount));
     }
 
-    moveDown() {
-        this.position = add_vectors(this.position, multiply_vector_by_scalar(this.up, - this.translation_speed));
+    moveDown(amount) {
+        this.position = add_vectors(this.position, multiply_vector_by_scalar(this.up, - amount));
     }
 
     moveLeft() {

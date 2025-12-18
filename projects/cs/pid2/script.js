@@ -42,7 +42,7 @@ let PID_theta;
 let PID_x;
 let PID_y;
 
-function init_PIDs() {
+function init_PIDs_backup() {
     PID_theta = new PID();
     PID_theta.K_p = 50;
     PID_theta.K_i = 0.3;
@@ -56,6 +56,23 @@ function init_PIDs() {
     PID_y = new PID();
     PID_y.K_p = 20;
     PID_y.K_i = 0.05;
+    PID_y.K_d = 200; //240
+}
+
+function init_PIDs() {
+    PID_theta = new PID();
+    PID_theta.K_p = 65;
+    PID_theta.K_i = 0.006;
+    PID_theta.K_d = 180;
+
+    PID_x = new PID();
+    PID_x.K_p = 0.05;
+    PID_x.K_i = 0.005;
+    PID_x.K_d = 1;
+
+    PID_y = new PID();
+    PID_y.K_p = 15;
+    PID_y.K_i = 0.1;
     PID_y.K_d = 200; //240
 }
 
@@ -78,6 +95,8 @@ canvas.addEventListener("mousedown", (event) => {
 
     target.x = x;
     target.y = y;
+
+    init_PIDs();
 });
 
 

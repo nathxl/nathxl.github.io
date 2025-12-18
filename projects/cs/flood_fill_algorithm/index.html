@@ -9,12 +9,6 @@
         <link rel="stylesheet" href="/css/style.css">
 
         
-            <link rel="stylesheet" href="/css/style.css">
-        
-            <link rel="stylesheet" href="/css/cs.css">
-        
-            <link rel="stylesheet" href="./style.css">
-        
 
         
             <script src="script.js" defer></script>
@@ -40,15 +34,21 @@
             
 <div class="outer-container">
   <div>
-    <h1>Find nearest in grid</h1>
+    <h1>Flood fill algorithm</h1>
     <p>
-      A search algorithm used to scan the surrounding cells, going from closest to furthest.
-      <br>
-      This algorithm is needed for a game i want to create.
+      An algorithm used to scan the surrounding cells in search for the closest target.
     </p>
     <hr>
   </div>
   <div class="inner-container">
+    <div>
+      <button id="find_nearest">Find nearest</button>
+      <select id="mode">
+        <option value="place_start">place start</option>
+        <option value="place_target">place target</option>
+        <option value="place_block">place block</option>
+      </select>
+    </div>
     <canvas id="canvas" width="600" height="600"></canvas>
   </div>
   <div>
